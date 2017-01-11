@@ -60,6 +60,30 @@ void MainOptions()
     LeftPadding();
     cout<<"11.CONSUM COMBUSTIBIL"<<endl;
 }
+void ChooseUnitsForConversion(int max_index,int &first_unit_index,double &value,int &second_unit_index)
+{
+    cout<<"Indexul unitatii pe care doriti sa o convertiti este: ";
+    cin>>first_unit_index;
+    while(first_unit_index>max_index||first_unit_index<=0)
+    {
+        cout<<"Index inexistent!Noul index: ";
+        cin>>first_unit_index;
+    }
+    cout<<"Care este valoarea pe care doriti sa o convertiti? ";
+    cin>>value;
+    while(first_unit_index!=6&&value<0)
+    {
+        cout<<"Nu se accepta valori negative.Noua valoare: ";
+        cin>>value;
+    }
+    cout<<"Indexul unitatii in care doriti sa faceti conversia: ";
+    cin>>second_unit_index;
+    while(second_unit_index>max_index||second_unit_index<=0)
+    {
+        cout<<"Index inexistent!Noul index: ";
+        cin>>second_unit_index;
+    }
+}
 void Lungime()
 {   LeftPadding();
     cout<<"1.mm"<<endl;
@@ -134,6 +158,7 @@ int main()
     valid=0;
     cout<<"Optiune invalida! Noua optiune:";
     break;
+
   }
 }while(!valid);
 
