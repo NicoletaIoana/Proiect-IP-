@@ -244,9 +244,21 @@ void TimeConversion()
     ChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
     double result=value*(unit_into_second[first_unit_index-1]/unit_into_second[second_unit_index-1]);
     cout<<endl;
+        LeftPadding();
+    cout<<"1.Rezultat real\n";
+    LeftPadding();
+    cout<<"2.Rezultat intreg \n";
+    int option;
+    cin>>option;
     cout<<"\n"<<value<<time_symbol[first_unit_index-1]<<" = ";
-    cout<<fixed;
-    cout<<setprecision(0)<<result<<time_symbol[second_unit_index-1];
+    if(option==1)
+     {cout.precision(15);
+      cout<<fixed<<result<<time_symbol[second_unit_index-1];
+     }
+     else
+     {cout<<fixed;
+      cout<<setprecision(0)<<result<<time_symbol[second_unit_index-1];
+     }
 }
 void VelocityUnits()
 {   LeftPadding();
@@ -469,7 +481,7 @@ void EnergyUnits()
 void EnergyConversion()
 {
     char energy_symbol[][5]={"cal","kcal","J","kJ","BTU","kBTU","Wh","kWh","MWh","MJ","GJ"};
-    double unit_into_joul[]={4.1868,4186.8,1,1000,1055.05585262,1055055.85262,3600,3600000,3600000000,1000000,1000000000};
+    double unit_into_joul[]={4.1868,4186.8,1,1000,1055.05585262,1055055.85262,3600,3600000,3600000000.,1000000,1000000000};
     int first_unit_index,second_unit_index,max_index;
     double value;
     max_index=11;
