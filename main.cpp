@@ -36,6 +36,12 @@ void LeftPadding()
 {
     cout<<"                              ";
 }
+void LanguageOption()
+{
+    LeftPadding();
+    cout<<"1.ROMANA"<<"                  ";
+    cout<<"2.ENGLISH"<<endl;
+}
 void MainOptions()
 {
     LeftPadding();
@@ -72,7 +78,8 @@ void ChooseUnitsForConversion(int max_index,int &first_unit_index,double &value,
     }
     cout<<"Care este valoarea pe care doriti sa o convertiti? ";
     cin>>value;
-    while(first_unit_index!=6&&value<0)
+    if(max_index!=4)
+    while(value<0)
     {
         cout<<"Nu se accepta valori negative.Noua valoare: ";
         cin>>value;
@@ -622,12 +629,367 @@ void FuelConsConversion()
     else
      cout<<fixed<<(double)(result)<<fuelCons_symbol[second_unit_index-1];
 }
+void ENGMainOptions()
+{
+    LeftPadding();
+    cout<<"1.LENGTH"<<endl;
+    LeftPadding();
+    cout<<"2.AREA"<<endl;
+    LeftPadding();
+    cout<<"3.VOLUME"<<endl;
+    LeftPadding();
+    cout<<"4.TIME"<<endl;
+    LeftPadding();
+    cout<<"5.VELOCITY"<<endl;
+    LeftPadding();
+    cout<<"6.TEMPERATURE"<<endl;
+    LeftPadding();
+    cout<<"7.MASS"<<endl;
+    LeftPadding();
+    cout<<"8.ENERGY"<<endl;
+    LeftPadding();
+    cout<<"9.PRESSURE"<<endl;
+    LeftPadding();
+    cout<<"10.DENSITY"<<endl;
+    LeftPadding();
+    cout<<"11.FUEL CONSUMPTION"<<endl;
+}
+void ENGChooseUnitsForConversion(int max_index,int &first_unit_index,double &value,int &second_unit_index)
+{
+    cout<<"FROM: ";
+    cin>>first_unit_index;
+    while(first_unit_index>max_index||first_unit_index<=0)
+    {
+        cout<<"Invalid index! New index: ";
+        cin>>first_unit_index;
+    }
+    cout<<"VALUE: ";
+    cin>>value;
+    if(max_index!=4)
+    while(value<0)
+    {
+        cout<<"Negative value is not accepted. New value: ";
+        cin>>value;
+    }
+    cout<<"TO: ";
+    cin>>second_unit_index;
+    while(second_unit_index>max_index||second_unit_index<=0)
+    {
+        cout<<"Invalid index! New index: ";
+        cin>>second_unit_index;
+    }
+}
+void ENGLengthConversion()
+{
+    char length_symbol[][5]={"mm","cm","dm","m","dam","hm","km","ft","in","mi","nmi","yd"};
+    double unit_into_meter[]={0.001,0.01,0.1,1,10,100,1000,0.3048,0.0254,1609.344,1852,0.9144};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=12;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result=value*(unit_into_meter[first_unit_index-1]/unit_into_meter[second_unit_index-1]);
+    cout.precision(15);
+    cout<<"\n"<<value<<length_symbol[first_unit_index-1]<<" = ";
+    if(result>=0.0001)
+     cout<<result<<length_symbol[second_unit_index-1];
+    else
+     cout<<fixed<<result<<length_symbol[second_unit_index-1];
+}
+void ENGAreaConversion()
+{
+    char area_symbol[][10]={"mm^2","cm^2","dm^2","m^2","a","ha","km^2","ft^2","in^2","yd^2","ac"};
+    double unit_into_squareMeter[]={0.000001,0.0001,0.01,1,100,10000,1000000,0.0929,0.0006452,0.83612,4046.856119};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=11;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result=value*(unit_into_squareMeter[first_unit_index-1]/unit_into_squareMeter[second_unit_index-1]);
+    cout.precision(15);
+    cout<<"\n"<<value<<area_symbol[first_unit_index-1]<<" = ";
+    if(result>=0.0001)
+     cout<<result<<area_symbol[second_unit_index-1];
+    else
+     cout<<fixed<<result<<area_symbol[second_unit_index-1];
+}
+void ENGVolumConversion()
+{
+    char volum_symbol[][10]={"ml","cl","dl","l","dal","hl","kl","mm^3","cm^3","dm^3","m^3","dam^3","hm^3","km^3","ft^3","in^3","yd^3"};
+    double unit_into_litre[]={0.001,0.01,0.1,1,10,100,1000,0.000001,0.001,1,1000,1000000,1000000000,1000000000000,28.32,0.016387064,764.56};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=17;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result=value*(unit_into_litre[first_unit_index-1]/unit_into_litre[second_unit_index-1]);
+    cout.precision(15);
+    cout<<"\n"<<value<<volum_symbol[first_unit_index-1]<<" = ";
+    if(result>=0.0001)
+     cout<<result<<volum_symbol[second_unit_index-1];
+    else
+     cout<<fixed<<result<<volum_symbol[second_unit_index-1];
+}
+void ENGTimeUnits()
+{   LeftPadding();
+    cout<<"1.ms"<<endl;
+    LeftPadding();
+    cout<<"2.s"<<endl;
+    LeftPadding();
+    cout<<"3.min"<<endl;
+    LeftPadding();
+    cout<<"4.hours"<<endl;
+    LeftPadding();
+    cout<<"5.days"<<endl;
+    LeftPadding();
+    cout<<"6.weeks"<<endl;
+}
+void ENGTimeConversion()
+{
+    char time_symbol[][12]={"ms","s","min","hours","days","weeks"};
+    double unit_into_second[]={0.001,1,60,3600,86400,604800};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=6;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result=value*(unit_into_second[first_unit_index-1]/unit_into_second[second_unit_index-1]);
+    cout<<endl;
+    LeftPadding();
+    cout<<"1.Accurate result\n";
+    LeftPadding();
+    cout<<"2.Round result\n";
+    int option;
+    cin>>option;
+    cout<<"\n"<<value<<time_symbol[first_unit_index-1]<<" = ";
+    if(option==1)
+     {cout.precision(15);
+      cout<<fixed<<result<<time_symbol[second_unit_index-1];
+     }
+     else
+     {cout<<fixed;
+      cout<<setprecision(0)<<result<<time_symbol[second_unit_index-1];
+     }
+}
+void ENGVelocityConversion()
+{
+    char length_symbol[][5]={"mm","cm","dm","m","dam","hm","km","ft","in","mi","nmi","yd"};
+    double unit_into_meter[]={0.001,0.01,0.1,1,10,100,1000,0.3048,0.0254,1609.344,1852,0.9144};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=36;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double multiplier_for_conversion=1;
+    int column_difference,first_index_column,second_index_column;
+    char time_unit[][5]={"/s","/min","/h"};
+    first_index_column=first_unit_index%3;
+    second_index_column=second_unit_index%3;
+    if(first_index_column==0)
+        first_index_column=3;
+    if(second_index_column==0)
+        second_index_column=3;
+    column_difference=first_index_column-second_index_column;
+    if(column_difference==-1)
+     multiplier_for_conversion=60;
+    else
+        if(column_difference==-2)
+         multiplier_for_conversion=3600;
+        else
+         if(column_difference==1)
+          multiplier_for_conversion=0.01666666;
+         else
+           if(column_difference==2)
+            multiplier_for_conversion=0.000277777;
+
+    double result=multiplier_for_conversion*value*(unit_into_meter[(first_unit_index-first_index_column)/3]/unit_into_meter[(second_unit_index-second_index_column)/3]);
+    cout.precision(15);
+    cout<<"\n"<<value<<length_symbol[(first_unit_index-first_index_column)/3]<<time_unit[first_index_column-1]<<" = ";
+    if(result>=0.0001)
+     cout<<(double)(result)<<length_symbol[(second_unit_index-second_index_column)/3]<<time_unit[second_index_column-1];
+    else
+     cout<<fixed<<(double)(result)<<length_symbol[(second_unit_index-second_index_column)/3]<<time_unit[second_index_column-1];
+
+}
+void ENGTemperatureConversion()
+{   char temperature_symbol[][5]={"C","F","K","R"};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=4;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result;
+    switch (first_unit_index) {
+  case 1:
+      switch(second_unit_index)
+      {
+         case 1:
+             result=value;
+             break;
+         case 2:
+             result=(value*9/5)+32;
+             break;
+         case 3:
+             result=value+273.15;
+             break;
+         case 4:
+             result=(value+273.15)*9/5;
+      }
+    break;
+  case 2:
+       switch(second_unit_index)
+      {
+         case 1:
+             result=(value-32)*5/9;
+             break;
+         case 2:
+             result=value;
+             break;
+         case 3:
+             result=(value+459.67)*5/9;
+             break;
+         case 4:
+             result=value+459.67;
+      }
+    break;
+  case 3:
+       switch(second_unit_index)
+      {
+         case 1:
+             result=value-273.15;
+             break;
+         case 2:
+             result=value*9/5-459.67;
+             break;
+         case 3:
+             result=value;
+             break;
+         case 4:
+             result=value*9/5;
+      }
+    break;
+  case 4:
+       switch(second_unit_index)
+      {
+         case 1:
+             result=(value-491.67)*5/9;
+             break;
+         case 2:
+             result=value-459.67;
+             break;
+         case 3:
+             result=value*5/9;
+             break;
+         case 4:
+             result=value;
+      }
+    break;
+  default:
+    break;
+  }
+    cout.precision(15);
+    cout<<"\n"<<value<<temperature_symbol[first_unit_index-1]<<" = ";
+    cout<<result<<temperature_symbol[second_unit_index-1];
+}
+void ENGMassConversion()
+{
+    char mass_symbol[][5]={"mg","cg","dg","g","dag","hg","kg","q","t","lb","oz"};
+    double unit_into_gram[]={0.001,0.01,0.1,1,10,100,1000,100000,1000000,453.59237,28.3495};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=11;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result=value*(unit_into_gram[first_unit_index-1]/unit_into_gram[second_unit_index-1]);
+    cout.precision(15);
+    cout<<"\n"<<value<<mass_symbol[first_unit_index-1]<<" = ";
+    if(result>=0.0001)
+     cout<<(double)(result)<<mass_symbol[second_unit_index-1];
+    else
+     cout<<fixed<<(double)(result)<<mass_symbol[second_unit_index-1];
+}
+void ENGEnergyConversion()
+{
+    char energy_symbol[][5]={"cal","kcal","J","kJ","BTU","kBTU","Wh","kWh","MWh","MJ","GJ"};
+    double unit_into_joul[]={4.1868,4186.8,1,1000,1055.05585262,1055055.85262,3600,3600000,3600000000.,1000000,1000000000};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=11;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result=value*(unit_into_joul[first_unit_index-1]/unit_into_joul[second_unit_index-1]);
+    cout.precision(15);
+    cout<<"\n"<<value<<energy_symbol[first_unit_index-1]<<" = ";
+    if(result>=0.0001)
+     cout<<(double)(result)<<energy_symbol[second_unit_index-1];
+    else
+     cout<<fixed<<(double)(result)<<energy_symbol[second_unit_index-1];
+}
+void ENGPressureConversion()
+{
+    char pressure_symbol[][7]={"Pa","at","atm","bar","inH2O","inHg","KPa","mH2O","mmH2O","mmHg","N/mm^2","PSI","torr","MPa"};
+    double unit_into_Pascal[]={1,98066.5,101325.2738,9800,248.84,3386.38815,1000,9800,9.8,133.32236,1000000,6894.74729317,133.3226,1000000};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=14;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result=value*(unit_into_Pascal[first_unit_index-1]/unit_into_Pascal[second_unit_index-1]);
+    cout.precision(15);
+    cout<<"\n"<<value<<pressure_symbol[first_unit_index-1]<<" = ";
+    if(result>=0.0001)
+    cout<<(double)(result)<<pressure_symbol[second_unit_index-1];
+    else
+    cout<<fixed<<(double)(result)<<pressure_symbol[second_unit_index-1];
+
+}
+void ENGDensityConversion()
+{
+    char density_symbol[][8]={"g/cm^3","g/l","g/m^3","g/ml","g/mm^3","kg/cm^3","kg/l","kg/m^3","mg/cm^3","mg/l","t/m^3"};
+    double unit_into_l_per_g[]={1000,1,0.001,1000,1000000,1000000,1000,1,1,0.001,1000};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=11;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result=value*(unit_into_l_per_g[first_unit_index-1]/unit_into_l_per_g[second_unit_index-1]);
+    cout.precision(15);
+    cout<<"\n"<<value<<density_symbol[first_unit_index-1]<<" = ";
+    if(result>=0.0001)
+     cout<<(double)(result)<<density_symbol[second_unit_index-1];
+    else
+     cout<<fixed<<(double)(result)<<density_symbol[second_unit_index-1];
+}
+void ENGFuelConsConversion()
+{
+    char fuelCons_symbol[][15]={"l/100km","km/l","mi/gal(UK)","gal/100mi(UK)","mi/l","l/100mi"};
+    double unit_into_l_per_100km[]={1,100,282.4809363,2.824809363,62.1371192,0.621371192};
+    int first_unit_index,second_unit_index,max_index;
+    double value;
+    max_index=6;
+    ENGChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
+    double result;
+    if(first_unit_index==2||first_unit_index==3||first_unit_index==5)
+      if(second_unit_index==1||second_unit_index==4||second_unit_index==6)
+       result=(unit_into_l_per_100km[first_unit_index-1]/unit_into_l_per_100km[second_unit_index-1])/value;
+      else
+       result=(unit_into_l_per_100km[second_unit_index-1]/unit_into_l_per_100km[first_unit_index-1])*value;
+    else
+       if(second_unit_index==2||second_unit_index==3||second_unit_index==5)
+       result=(unit_into_l_per_100km[second_unit_index-1]/unit_into_l_per_100km[first_unit_index-1])/value;
+      else
+       result=(unit_into_l_per_100km[first_unit_index-1]/unit_into_l_per_100km[second_unit_index-1])*value;
+
+    cout.precision(15);
+    cout<<"\n"<<value<<fuelCons_symbol[first_unit_index-1]<<" = ";
+    if(result>=0.0001)
+     cout<<(double)(result)<<fuelCons_symbol[second_unit_index-1];
+    else
+     cout<<fixed<<(double)(result)<<fuelCons_symbol[second_unit_index-1];
+}
 int main()
 {   int Continue=0;
     AsciiFrameUp();
     ProjName();
     AsciiFrameDown();
     cout<<endl;
+        LanguageOption();
+    int language;
+    do{cout<<"Optiune/Option: ";
+       cin>>language;
+    }while(language!=1&&language!=2);
+
+    if(language==1)
     do{
     MainOptions();
     int first_input;
@@ -689,9 +1051,73 @@ int main()
     }while(!valid);
    cout<<endl;
    cout<<"1.Convertiti o alta unitate\n";
+   cout<<"2.Iesire\n";
+   cin>>Continue;
+ }while(Continue==1);
+else
+  do
+    {ENGMainOptions();
+    int first_input;
+    bool valid;
+    cout<<"Choose conversion type: ";
+    do
+    { valid=1;
+      cin>>first_input;
+    switch (first_input ) {
+  case 1:
+    LengthUnits();
+    ENGLengthConversion();
+    break;
+  case 2:
+    AreaUnits();
+    ENGAreaConversion();
+    break;
+  case 3:
+    VolumUnits();
+    ENGVolumConversion();
+    break;
+  case 4:
+    ENGTimeUnits();
+    ENGTimeConversion();
+    break;
+  case 5:
+    VelocityUnits();
+    ENGVelocityConversion();
+    break;
+  case 6:
+    TemperatureUnits();
+    ENGTemperatureConversion();
+    break;
+  case 7:
+    MassUnits();
+    ENGMassConversion();
+    break;
+  case 8:
+    EnergyUnits();
+    ENGEnergyConversion();
+    break;
+  case 9:
+    PressureUnits();
+    ENGPressureConversion();
+    break;
+  case 10:
+    DensityUnits();
+    ENGDensityConversion();
+    break;
+  case 11:
+    FuelConsUnits();
+    ENGFuelConsConversion();
+    break;
+  default:
+    valid=0;
+    cout<<"Invalid option! New option:";
+    break;
+   }
+      }while(!valid);
+   cout<<endl;
+   cout<<"1.Convert another unit\n";
    cout<<"2.Exit\n";
    cin>>Continue;
  }while(Continue==1);
-
     return 0;
 }
