@@ -314,7 +314,7 @@ void VelocityConversion()
           multiplier_for_conversion=0.01666666;
          else
            if(column_difference==2)
-            multiplier_for_conversion=0.00277777;
+            multiplier_for_conversion=0.000277777;
 
     double result=multiplier_for_conversion*value*(unit_into_meter[(first_unit_index-first_index_column)/3]/unit_into_meter[(second_unit_index-second_index_column)/3]);
     cout.precision(15);
