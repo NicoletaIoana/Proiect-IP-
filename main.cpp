@@ -575,9 +575,9 @@ void FuelConsUnits()
     LeftPadding();
     cout<<"2.km/l"<<endl;
     LeftPadding();
-    cout<<"3.mi/gal"<<endl;
+    cout<<"3.mi/gal<UK>"<<endl;
     LeftPadding();
-    cout<<"4.gal/100mi"<<endl;
+    cout<<"4.gal/100mi<UK>"<<endl;
     LeftPadding();
     cout<<"5.mi/l"<<endl;
     LeftPadding();
@@ -592,10 +592,17 @@ void FuelConsConversion()
     max_index=6;
     ChooseUnitsForConversion(max_index,first_unit_index,value,second_unit_index);
     double result;
-    if(second_unit_index==1||second_unit_index==4||second_unit_index==6)
-     result=(unit_into_l_per_100km[first_unit_index-1]/unit_into_l_per_100km[second_unit_index-1])/value;
+    if(first_unit_index==2||first_unit_index==3||first_unit_index==5)
+       if(second_unit_index==1||second_unit_index==4||second_unit_index==6)
+        result=(unit_into_l_per_100km[first_unit_index-1]/unit_into_l_per_100km[second_unit_index-1])/value;
+       else
+        result=(unit_into_l_per_100km[second_unit_index-1]/unit_into_l_per_100km[first_unit_index-1])*value;
     else
-      result=(unit_into_l_per_100km[second_unit_index-1]/unit_into_l_per_100km[first_unit_index-1])*value;
+       if(second_unit_index==2||second_unit_index==3||second_unit_index==5)
+        result=(unit_into_l_per_100km[second_unit_index-1]/unit_into_l_per_100km[first_unit_index-1])/value;
+       else
+        result=(unit_into_l_per_100km[first_unit_index-1]/unit_into_l_per_100km[second_unit_index-1])*value;
+
     cout.precision(15);
     cout<<"\n"<<value<<fuelCons_symbol[first_unit_index-1]<<" = ";
     if(result>=0.0001)
